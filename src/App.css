@@ -1,0 +1,5 @@
+body {
+    font-family: 'Sofia sans', sans-serif;
+    background: linear-gradient(180deg, rgba(245, 71, 71, 0.26) 0%, rgba(245, 71, 72, 0));
+    background-size: cover;
+}
