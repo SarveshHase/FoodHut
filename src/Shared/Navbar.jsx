@@ -10,6 +10,7 @@ function Navbar() {
     const handleNav = () => {
         setNav(!nav)
     }
+
     return (
         <>
             <div className="bg-white/80 shadow-md fixed top-0 left-0 w-full z-40 ease-in duration-300 backdrop-blur-md">
@@ -44,7 +45,11 @@ function Navbar() {
                                 Popular Food
                             </NavLink>
 
-                            <Link to="/" className="bg-[#F54748] active:scale-90 transition duration-100 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white">Login</Link>
+                            <Link to="/login">
+                                <button className="bg-[#F54748] active:scale-90 transition duration-100 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white">
+                                    Login
+                                </button>
+                            </Link>
                         </div>
 
                         <div className="block lg:hidden z-40" onClick={handleNav}>
@@ -82,7 +87,11 @@ function Navbar() {
                                 Popular Food
                             </NavLink>
 
-                            <Link to="/" className="bg-[#F54748] active:scale-90 transition duration-100 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white">Login</Link>
+                            <Link to="/login">
+                                <button className="bg-[#F54748] active:scale-90 transition duration-100 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white">
+                                    Login
+                                </button>
+                            </Link>
                         </div>
 
                     </div>

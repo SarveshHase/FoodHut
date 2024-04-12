@@ -16,7 +16,6 @@ function Home() {
             <NewFoods />
             <Service2 />
             <Special />
-            <Footer />
         </>
     )
 }
