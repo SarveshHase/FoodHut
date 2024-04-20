@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import logo from '../assets/Logo.svg'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, Navigate, useNavigate } from 'react-router-dom'
 import { TiThMenu } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 import { useUserContext } from '../../context/UserContext';
@@ -8,6 +8,7 @@ import { useUserContext } from '../../context/UserContext';
 function Navbar() {
     const [nav, setNav] = useState(false);
     const { user, setUser } = useUserContext();
+    const navigate = useNavigate()
     console.log(user);
 
     const handleNav = () => {
@@ -16,6 +17,7 @@ function Navbar() {
 
     return (
         <>
+
             <div className="bg-white/80 shadow-md fixed top-0 left-0 w-full z-40 ease-in duration-300 backdrop-blur-md">
                 {
                     user?.user.isVerified === false && (<div className='bg-red-500 py-3 px-4 text-white'>
@@ -54,12 +56,40 @@ function Navbar() {
                             }>
                                 Popular Food
                             </NavLink>
+                            {
+                                user ?
+                                    (<div className="dropdown dropdown-end">
+                                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                            <div className="w-10 rounded-full">
+                                                <img alt="profile" src={user?.user.avatar} />
+                                            </div>
+                                        </div>
+                                        <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-white rounded-box w-52">
+                                            <li>
+                                                <Link className="justify-between">
+                                                    Profile
+                                                </Link>
+                                            </li>
+                                            <li><Link>Settings</Link></li>
+                                            <li><Link><button
+                                                onClick={() => {
+                                                    localStorage.clear()
+                                                    location.reload()
+                                                    navigate("/")
+                                                }}
+                                            >Logout</button></Link></li>
+                                        </ul>
+                                    </div>) :
+                                    (<Link to="/login">
+                                        <button className="bg-[#F54748] active:scale-90 transition duration-100 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white">
+                                            Login
+                                        </button>
+                                    </Link>)
+                            }
 
-                            <Link to="/login">
-                                <button className="bg-[#F54748] active:scale-90 transition duration-100 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white">
-                                    Login
-                                </button>
-                            </Link>
+
+
+
                         </div>
 
                         <div className="block lg:hidden z-40" onClick={handleNav}>
@@ -96,12 +126,23 @@ function Navbar() {
                             }>
                                 Popular Food
                             </NavLink>
-
-                            <Link to="/login">
-                                <button className="bg-[#F54748] active:scale-90 transition duration-100 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white">
-                                    Login
-                                </button>
-                            </Link>
+                            {
+                                user ?
+                                    (<Link>
+                                        <button className="bg-[#F54748] active:scale-90 transition duration-100 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white" onClick={() => {
+                                            localStorage.clear()
+                                            location.reload()
+                                            navigate("/")
+                                        }}>
+                                            Logout
+                                        </button>
+                                    </Link>) :
+                                    (<Link to="/login">
+                                        <button className="bg-[#F54748] active:scale-90 transition duration-100 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white">
+                                            Login
+                                        </button>
+                                    </Link>)
+                            }
                         </div>
 
                     </div>
