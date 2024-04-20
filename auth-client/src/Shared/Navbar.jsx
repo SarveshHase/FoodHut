@@ -17,7 +17,6 @@ function Navbar() {
 
     return (
         <>
-
             <div className="bg-white/80 shadow-md fixed top-0 left-0 w-full z-40 ease-in duration-300 backdrop-blur-md">
                 {
                     user?.user.isVerified === false && (<div className='bg-red-500 py-3 px-4 text-white'>
@@ -46,11 +45,13 @@ function Navbar() {
                             }>
                                 Our Menu
                             </NavLink>
-                            <NavLink to="/" className={({ isActive }) =>
-                                `${isActive ? "text-red-500" : "text-[#191919]"} text-xl font-medium hover:text-red-500`
-                            }>
-                                Add Food
-                            </NavLink>
+                            {   user?.user?.role === "admin" && (
+                                <NavLink to="/addFood" className={({ isActive }) =>
+                                    `${isActive ? "text-red-500" : "text-[#191919]"} text-xl font-medium hover:text-red-500`
+                                }>
+                                    Add Food
+                                </NavLink>)
+                            }
                             <NavLink to="/" className={({ isActive }) =>
                                 `${isActive ? "text-red-500" : "text-[#191919]"} text-xl font-medium hover:text-red-500`
                             }>

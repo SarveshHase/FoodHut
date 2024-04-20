@@ -55,7 +55,6 @@ const registerController = async (req, res) => {
                 avatar,
                 password: req.body.password,
                 passwordConfirm: req.body.passwordConfirm,
-                // isVerified: false,
                 otp
             });
 
@@ -127,15 +126,6 @@ const registerController = async (req, res) => {
                         `User with name ${name} registered successfully`
                     )
                 );
-            // return res.status(201)
-            //     .send({
-            //         message: `User with name ${name} registered successfully`,
-            //         data: {
-            //             user: newUser,
-            //             token,
-            //         },
-            //         success: true
-            //     })
 
         }
         else {
@@ -242,4 +232,36 @@ const loginController = async (req, res) => {
     }
 }
 
-export { registerController, authController, loginController }
+const verifyOtpController = async (req, res) => {
+    try {
+        const user = await User.findOne({ email: req.body.email })
+        if (user.otp === req.body.combineOtp) {
+            user.isVerified = true;
+            await user.save() //{ validateBeforeSave: false }
+            return res
+                .status(200)
+                .json(
+                    new ApiResponse(
+                        200,
+                        {},
+                        "Otp verified successfully"
+                    )
+                )
+        } else {
+            return res
+                .status(200)
+                .json(
+                    new ApiResponse(
+                        401,
+                        {},
+                        "Please enter correct Otp"
+                    )
+                );
+        }
+    } catch (error) {
+        console.log(error);
+        throw new ApiError(400, `Error while verifying OTP ${error.message}`);
+    }
+}
+
+export { registerController, authController, loginController, verifyOtpController }
