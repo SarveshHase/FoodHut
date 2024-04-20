@@ -11,7 +11,17 @@ const protect = async (req, res, next) => {
 
         jwt.verify(token, process.env.JWT_TOKEN_SECRET, (err, decode) => {
             if (err) {
-                throw new ApiError(401, `Authentication failed: ${err.message}`);
+                return res
+                    .status(200)
+                    .json(
+                        new ApiResponse(
+                            401,
+                            {
+                                message: "Auth Error"
+                            },
+                            `Error in auth.middleware verify function: ${error.message}`
+                        )
+                    );
             } else {
                 req.body.userId = decode.id;
                 next();
@@ -19,11 +29,17 @@ const protect = async (req, res, next) => {
         });
     } catch (error) {
         console.log(error);
-        if (error instanceof ApiError) {
-            res.status(error.statusCode).json(new ApiResponse(error.statusCode, null, error.message));
-        } else {
-            res.status(500).json(new ApiResponse(500, null, `Internal Server Error: ${error.message}`));
-        }
+        return res
+            .status(200)
+            .json(
+                new ApiResponse(
+                    401,
+                    {
+                        message: "Auth Error"
+                    },
+                    `Error in auth.middleware: ${error.message}`
+                )
+            );
     }
 };
 

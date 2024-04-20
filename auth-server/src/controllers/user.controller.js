@@ -11,7 +11,27 @@ const registerController = async (req, res) => {
         const { name, email, password, passwordConfirm, avatar } = req.body
         const existingUser = await User.findOne({ email: email })
         if (existingUser) {
-            throw new ApiError(409, "User with given email already exists")
+            return res
+                .status(200)
+                .json(
+                    new ApiResponse(
+                        401,
+                        {},
+                        `User with given email already exists`
+                    )
+                );
+        }
+
+        if (avatar === "") {
+            return res
+                .status(200)
+                .json(
+                    new ApiResponse(
+                        401,
+                        {},
+                        `Please upload a profile picture to register`
+                    )
+                );
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -35,14 +55,24 @@ const registerController = async (req, res) => {
                 avatar,
                 password: req.body.password,
                 passwordConfirm: req.body.passwordConfirm,
+                // isVerified: false,
                 otp
             });
 
+            console.log(newUser);
+
             if (!newUser) {
-                throw new ApiError(500, `Something went wrong while registering the user: ${error.message}`)
+                console.log(`Something went wrong while registering the user: ${error.message}`);
+                return res
+                    .status(200)
+                    .json(
+                        new ApiResponse(
+                            500,
+                            {},
+                            `Something went wrong while registering the user`
+                        )
+                    );
             }
-
-
 
             const token = jwt.sign(
                 { id: newUser._id },
@@ -68,7 +98,16 @@ const registerController = async (req, res) => {
 
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
-                    throw new ApiError(502, `Error while sending email for OTP verification: ${error.message}`)
+                    console.log(`Error while sending email for OTP verification: ${error.message}`);
+                    return res
+                        .status(200)
+                        .json(
+                            new ApiResponse(
+                                502,
+                                {},
+                                "Error while sending email for OTP verification"
+                            )
+                        );
                 }
 
                 res.json(
@@ -84,9 +123,8 @@ const registerController = async (req, res) => {
                         {
                             user: newUser,
                             token,
-                            message: `User with name ${name} registered successfully`
                         },
-                        "User registered Successfully"
+                        `User with name ${name} registered successfully`
                     )
                 );
             // return res.status(201)
@@ -106,9 +144,7 @@ const registerController = async (req, res) => {
                 .json(
                     new ApiResponse(
                         401,
-                        {
-                            message: `Some Problem occurred during registration`
-                        },
+                        {},
                         "Passwords don't match"
                     )
                 );
@@ -120,16 +156,14 @@ const registerController = async (req, res) => {
 
 const authController = async (req, res) => {
     try {
-        const user = await User.findOne({ _id: req.body?.userId });
+        const user = await User.findOne({ _id: req.body?.userId }).select("+isVerified");
         if (!user) {
             return res
                 .status(200)
                 .json(
                     new ApiResponse(
                         401,
-                        {
-                            message: `User not found!`
-                        },
+                        {},
                         "User not found!"
                     )
                 );
@@ -141,8 +175,7 @@ const authController = async (req, res) => {
                     new ApiResponse(
                         200,
                         {
-                            data: user,
-                            message: `User Found`
+                            user: user,
                         },
                         "User Found successfully"
                     )
@@ -164,9 +197,7 @@ const loginController = async (req, res) => {
                 .json(
                     new ApiResponse(
                         401,
-                        {
-                            message: `User not found!`
-                        },
+                        {},
                         "User not found!"
                     )
                 );
@@ -174,16 +205,15 @@ const loginController = async (req, res) => {
 
         const isPasswordMatched = await bcrypt.compare(req.body?.password, user.password);
         const signedUser = await User.findOne({ email: req.body.email })
+        // console.log(signedUser)
         if (!isPasswordMatched) {
             return res
                 .status(200)
                 .json(
                     new ApiResponse(
                         401,
-                        {
-                            message: `Invalid password or email`
-                        },
-                        "Error in loginController: Invalid password or email"
+                        {},
+                        "Invalid password or email"
                     )
                 );
         }
@@ -199,11 +229,8 @@ const loginController = async (req, res) => {
                 new ApiResponse(
                     200,
                     {
-                        data: {
-                            user: signedUser,
-                            token
-                        },
-                        message: `User logged in successfully`
+                        user: signedUser,
+                        token,
                     },
                     "User logged in successfully"
                 )

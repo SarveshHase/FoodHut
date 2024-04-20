@@ -3,7 +3,7 @@ import logo from '../assets/Logo.svg'
 import { Link, NavLink } from 'react-router-dom'
 import { TiThMenu } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
-import { useUserContext } from '../../context/userContext';
+import { useUserContext } from '../../context/UserContext';
 
 function Navbar() {
     const [nav, setNav] = useState(false);
@@ -17,6 +17,11 @@ function Navbar() {
     return (
         <>
             <div className="bg-white/80 shadow-md fixed top-0 left-0 w-full z-40 ease-in duration-300 backdrop-blur-md">
+                {
+                    user?.user.isVerified === false && (<div className='bg-red-500 py-3 px-4 text-white'>
+                        <Link to="/verifyOtp">Please verify OTP</Link>
+                    </div>)
+                }
                 <div className="py-3 px-10 sm:px-4 md:px-6 lg:px-6 container mx-auto">
                     <div className="flex items-center justify-between">
                         <NavLink to="/">

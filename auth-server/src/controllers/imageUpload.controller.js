@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from 'cloudinary';
 import fs from "fs"
 import { ApiError } from "../utils/ApiError.js"
+import { ApiResponse } from "../utils/ApiResponse.js"
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -12,7 +13,15 @@ const imageUploadController = async (req, res) => {
     try {
         const file = req.files?.image.path;
         if (!file) {
-            throw new ApiError(400, "No file to upload")
+            return res
+                .status(200)
+                .json(
+                    new ApiResponse(
+                        401,
+                        {},
+                        `Please upload image before registering`
+                    )
+                );
         }
 
         const result = await cloudinary.uploader.upload(file)
