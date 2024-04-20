@@ -3,9 +3,12 @@ import logo from '../assets/Logo.svg'
 import { Link, NavLink } from 'react-router-dom'
 import { TiThMenu } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
+import { useUserContext } from '../../context/userContext';
 
 function Navbar() {
-    const [nav, setNav] = useState(false)
+    const [nav, setNav] = useState(false);
+    const { user, setUser } = useUserContext();
+    console.log(user);
 
     const handleNav = () => {
         setNav(!nav)
@@ -16,7 +19,9 @@ function Navbar() {
             <div className="bg-white/80 shadow-md fixed top-0 left-0 w-full z-40 ease-in duration-300 backdrop-blur-md">
                 <div className="py-3 px-10 sm:px-4 md:px-6 lg:px-6 container mx-auto">
                     <div className="flex items-center justify-between">
-                        <img src={logo} alt="" className='h-14 cursor-pointer' />
+                        <NavLink to="/">
+                            <img src={logo} alt="" className='h-14 cursor-pointer' />
+                        </NavLink>
 
                         <div className="lg:flex hidden gap-8 items-center">
                             <NavLink to="/" className={({ isActive }) =>

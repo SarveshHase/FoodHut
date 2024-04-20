@@ -1,15 +1,44 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import logo from '../assets/Logo.svg'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
-    const handleSubmit = (e) => {
+    const navigate = useNavigate()
+
+    const handleOnLoginSubmit = (e) => {
         e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        const userData = { email, password }
+        console.log(userData);
+
+        fetch('http://localhost:8000/api/v1/user/login', {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(userData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    localStorage.setItem("token", data.data.token)
+                    toast.success(data.message)
+                    form.reset()
+                    navigate('/')
+                }
+                else {
+                    toast.error(data.message)
+                }
+            })
     }
     return (
         <div className="login">
             <div className="h-screen pt-[16vh]">
-                <form onSubmit={handleSubmit} className="ease-in duration-300 w-[80%] sm:w-max shadow-sm backdrop-blur-md bg-white/80 lg:w-max mx-auto flex flex-col items-center rounded-md px-8 py-5">
+                <form onSubmit={handleOnLoginSubmit} className="ease-in duration-300 w-[80%] sm:w-max shadow-sm backdrop-blur-md bg-white/80 lg:w-max mx-auto flex flex-col items-center rounded-md px-8 py-5">
                     <NavLink to='/'>
                         <img src={logo} alt="" className='logo mb-6 cursor-pointer text-center' />
                     </NavLink>
@@ -30,6 +59,7 @@ function Login() {
                     <Link to='/register' className='text-[#fdc55e] text-center font-semibold w-full mb-3 py-2 px-4 rounded hover:underline hover:underline-offset-4 active:scale-90 transition duration-150 transform'>
                         Create an Account
                     </Link>
+                    <ToastContainer />
                 </form>
             </div>
         </div>
