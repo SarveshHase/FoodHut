@@ -76,28 +76,28 @@ const registerController = async (req, res) => {
                 )
             });
 
-            // return res
-            //     .status(200)
-            //     .json(
-            //         new ApiResponse(
-            //             200,
-            //             {
-            //                 user: newUser,
-            //                 token,
-            //                 message: `User with name ${name} registered successfully`
-            //             },
-            //             "User registered Successfully"
-            //         )
-            //     );
-            return res.status(201)
-                .send({
-                    message: `User with name ${name} registered successfully`,
-                    data: {
-                        user: newUser,
-                        token,
-                    },
-                    success: true
-                })
+            return res
+                .status(200)
+                .json(
+                    new ApiResponse(
+                        200,
+                        {
+                            user: newUser,
+                            token,
+                            message: `User with name ${name} registered successfully`
+                        },
+                        "User registered Successfully"
+                    )
+                );
+            // return res.status(201)
+            //     .send({
+            //         message: `User with name ${name} registered successfully`,
+            //         data: {
+            //             user: newUser,
+            //             token,
+            //         },
+            //         success: true
+            //     })
 
         }
         else {
