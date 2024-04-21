@@ -40,13 +40,13 @@ function Navbar() {
                             }>
                                 Why Us
                             </NavLink>
-                            <NavLink to="/" className={({ isActive }) =>
+                            <NavLink to="/menu" className={({ isActive }) =>
                                 `${isActive ? "text-red-500" : "text-[#191919]"} text-xl font-medium hover:text-red-500`
                             }>
                                 Our Menu
                             </NavLink>
-                            {   user?.user?.role === "admin" && (
-                                <NavLink to="/addFood" className={({ isActive }) =>
+                            {user?.user?.role === "admin" && (
+                                <NavLink to="admin/addFood" className={({ isActive }) =>
                                     `${isActive ? "text-red-500" : "text-[#191919]"} text-xl font-medium hover:text-red-500`
                                 }>
                                     Add Food
@@ -72,7 +72,7 @@ function Navbar() {
                                                 </Link>
                                             </li>
                                             <li><Link>Settings</Link></li>
-                                            <li><Link><button
+                                            <li><Link><button className="bg-[#F54748] active:scale-90 transition duration-100 transform hover:shadow-xl shadow-md rounded-full px-2 py-1 text-sm font-medium text-white"
                                                 onClick={() => {
                                                     localStorage.clear()
                                                     location.reload()
@@ -87,10 +87,6 @@ function Navbar() {
                                         </button>
                                     </Link>)
                             }
-
-
-
-
                         </div>
 
                         <div className="block lg:hidden z-40" onClick={handleNav}>
@@ -112,16 +108,17 @@ function Navbar() {
                             }>
                                 Why Us
                             </NavLink>
-                            <NavLink to="/" className={({ isActive }) =>
+                            <NavLink to="/menu" className={({ isActive }) =>
                                 `${isActive ? "text-red-500" : "text-[#191919]"} text-base font-medium hover:text-red-500`
                             }>
                                 Our Menu
                             </NavLink>
-                            <NavLink to="/" className={({ isActive }) =>
+                            {user?.user?.role === "admin" && (<NavLink to="/admin/addFood" className={({ isActive }) =>
                                 `${isActive ? "text-red-500" : "text-[#191919]"} text-base font-medium hover:text-red-500`
                             }>
                                 Add Food
-                            </NavLink>
+                            </NavLink>)
+                            }
                             <NavLink to="/" className={({ isActive }) =>
                                 `${isActive ? "text-red-500" : "text-[#191919]"} text-base font-medium hover:text-red-500`
                             }>

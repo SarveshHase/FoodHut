@@ -9,6 +9,12 @@ import Register from './pages/Register.jsx'
 import { UserProvider } from '../context/UserContext.jsx'
 import ProtectedRoute from './pages/ProtectedRoute.jsx'
 import VerifyOtp from './pages/VerifyOtp.jsx'
+import Error from './components/admin_components/Error.jsx'
+import AdminRoute from './pages/admin/AdminRoute.jsx'
+import AddFood from './pages/admin/AddFood.jsx'
+import { FoodProvider } from '../context/FoodContext.jsx'
+import Menu from './pages/Menu.jsx'
+import FoodDetails from './pages/FoodDetails.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,7 +23,10 @@ const router = createBrowserRouter(
       < Route path='/login' element={< Login />} />
       < Route path='/register' element={< Register />} />
       <Route path='/verifyOtp' element={<ProtectedRoute> <VerifyOtp /> </ProtectedRoute>} />
-      {/* <Route path='/addFood' element={<ProtectedRoute> <AddFood /> </ProtectedRoute>} /> */}
+      < Route path='/error' element={< Error />} />
+      <Route path='/admin/addFood' element={<ProtectedRoute><AdminRoute><AddFood /></AdminRoute></ProtectedRoute>} />
+      < Route path='/menu' element={<ProtectedRoute> <Menu /> </ProtectedRoute>} />
+      <Route path='/menu/:id' element={<ProtectedRoute> <FoodDetails /> </ProtectedRoute>} />
     </Route >
   )
 )
@@ -25,7 +34,9 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <UserProvider>
-      <RouterProvider router={router} />
+      <FoodProvider>
+        <RouterProvider router={router} />
+      </FoodProvider>
     </UserProvider>
   </React.StrictMode>,
 )
