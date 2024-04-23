@@ -15,6 +15,9 @@ import AddFood from './pages/admin/AddFood.jsx'
 import { FoodProvider } from '../context/FoodContext.jsx'
 import Menu from './pages/Menu.jsx'
 import FoodDetails from './pages/FoodDetails.jsx'
+import Profile from './pages/Profile.jsx'
+import { CartProvider } from '../context/CartContext.jsx'
+import ViewCart from './pages/ViewCart.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +30,8 @@ const router = createBrowserRouter(
       <Route path='/admin/addFood' element={<ProtectedRoute><AdminRoute><AddFood /></AdminRoute></ProtectedRoute>} />
       < Route path='/menu' element={<ProtectedRoute> <Menu /> </ProtectedRoute>} />
       <Route path='/menu/:id' element={<ProtectedRoute> <FoodDetails /> </ProtectedRoute>} />
+      <Route path='/profile' element={<ProtectedRoute> <Profile /> </ProtectedRoute>} />
+      <Route path='/viewcart' element={<ProtectedRoute> <ViewCart /> </ProtectedRoute>} />
     </Route >
   )
 )
@@ -35,7 +40,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <UserProvider>
       <FoodProvider>
-        <RouterProvider router={router} />
+        <CartProvider>
+          <RouterProvider router={router} />
+        </CartProvider>
       </FoodProvider>
     </UserProvider>
   </React.StrictMode>,

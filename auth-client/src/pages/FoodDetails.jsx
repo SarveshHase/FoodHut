@@ -46,6 +46,11 @@ function FoodDetails() {
                                     foodDetails?.name
                                 }
                             </div>
+                            <div className="text-2xl mb-2 font-bold text-yellow-500">
+                                Price: <span>&#8377;</span>{
+                                    foodDetails?.price
+                                }
+                            </div>
                             <div className="text-xl text-justify text-black mb-6">
                                 {
                                     foodDetails?.description
@@ -68,17 +73,31 @@ function FoodDetails() {
                                 </span>
                             </div>
                             <div className="flex flex-col sm:flex-row items-center space-y-6 sm:space-y-0 sm:gap-5 sm:mx-auto sm:justify-center">
-                                <button className='bg-[#f54748] active:scale-90 transition duration-200 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white'
+                                <button className='bg-white active:scale-90 transition duration-200 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-[#f54748]'
                                 >Add To Cart</button>
-                                <button className='bg-[#f54748] active:scale-90 transition duration-200 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white'
+                                <button className='bg-white active:scale-90 transition duration-200 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-[#f54748]'
                                 >Favourite</button>
                             </div>
 
                         </div>
                     </div>
+
+                    <div className="grid lg:grid-cols-4 pb-14 md:grid-cols-2 grid-cols-2 gap-8">
+                        <div className="bg-[#f54748] py-4 text-center text-white font-semibold">
+                            Category: {foodDetails?.category}
+                        </div>
+                        <div className="bg-[#f54748] py-4 text-center text-white font-semibold">
+                            Weight: {foodDetails?.weight} g
+                        </div>
+                        <div className="bg-[#f54748] py-4 text-center text-white font-semibold">
+                            Location: Pune
+                        </div>
+                        <div className="bg-[#f54748] py-4 text-center text-white font-semibold">
+                            Location: Pune
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     )
 }

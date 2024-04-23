@@ -264,4 +264,47 @@ const verifyOtpController = async (req, res) => {
     }
 }
 
-export { registerController, authController, loginController, verifyOtpController }
+const updateUserProfileController = async (req, res) => {
+    try {
+        const { name, avatar, userId, city, district, state, zipcode } = req.body;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res
+                .status(200)
+                .json(
+                    new ApiResponse(
+                        404,
+                        {},
+                        "User doesn't exist"
+                    )
+                );
+        }
+
+        user.name = name || user.name;
+        user.avatar = avatar || user.avatar;
+        user.city = city || user.city;
+        user.district = district || user.district;
+        user.state = state || user.state;
+        user.zipcode = zipcode || user.zipcode;
+
+        await user.save();
+
+        return res
+            .status(200)
+            .json(
+                new ApiResponse(
+                    200,
+                    {
+                        user
+                    },
+                    "User profile updated successfully"
+                )
+            );
+    } catch (error) {
+        console.log("Error while updating user profile", error.message);
+        throw new ApiError(401, `Error while updating user profile ${error.message}`);
+    }
+}
+
+export { registerController, authController, loginController, verifyOtpController, updateUserProfileController }

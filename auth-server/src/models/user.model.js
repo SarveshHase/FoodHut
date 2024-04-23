@@ -47,7 +47,24 @@ const userSchema = new mongoose.Schema({
     avatar: {
         type: String,
         required: true
-    }
+    },
+
+    city: {
+        type: String,
+        required: false
+    },
+    district: {
+        type: String,
+        required: false
+    },
+    state: {
+        type: String,
+        required: false
+    },
+    zipcode: {
+        type: String,
+        required: false
+    },
 }, { timestamps: true })
 
 export const User = mongoose.model("User", userSchema)

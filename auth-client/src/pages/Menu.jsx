@@ -83,8 +83,8 @@ function Menu() {
             {
               category.map(btn => (
                 <Link key={btn.id}><button
-                  className={active === btn.id ? "text-xl px-4 py-3 text-center text-white bg-red-500 border-red-500 border-2 rounded- justify-center font-medium"
-                    : "text-xl px-4 py-3 text-red-500 border-red-500 border-2 rounded-sm font-medium"}
+                  className={active === btn.id ? "text-xl px-4 py-3 text-center text-white bg-red-500 border-red-500 border-2 rounded-3xl justify-center font-medium"
+                    : "text-xl px-4 py-3 text-red-500 border-red-500 border-2 rounded-3xl font-medium"}
                   onClick={() => handleBtn(btn)}
                 >{btn.name}</button></Link>
               ))

@@ -9,6 +9,7 @@ function Register() {
     const [image, setImage] = useState({})
     const [uploading, setUploading] = useState(false)
     const navigate = useNavigate()
+    
 
     const handleImage = async (e) => {
         const file = e.target.files[0];

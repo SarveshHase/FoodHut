@@ -2,8 +2,11 @@ import React from 'react'
 import { FaHeart } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { useCartContext } from '../../context/CartContext';
 
 function FoodCard({ currEle }) {
+    const { cartItems, removeItem, addToCart } = useCartContext();
+
     return (
         <div className="food-card bg-red-500/10 rounded-xl flex flex-col cursor-pointer items-center p-5">
             <div className="relative mb-3 ">
@@ -34,7 +37,7 @@ function FoodCard({ currEle }) {
                 </div>
             </div>
 
-            <button className="bg-[#f54748] active:scale-90 transition duration-150 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white">Order Now</button>
+            <button className="bg-[#f54748] active:scale-90 transition duration-150 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white" onClick={() => addToCart(currEle)}>Add To Cart</button>
         </div>
     )
 }

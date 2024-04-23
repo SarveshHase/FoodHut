@@ -19,7 +19,7 @@ const protect = async (req, res, next) => {
                             {
                                 message: "Auth Error"
                             },
-                            `Error in auth.middleware verify function: ${error.message}`
+                            `Error in auth.middleware verify function: ${err.message}`
                         )
                     );
             } else {
