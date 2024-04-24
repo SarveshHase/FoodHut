@@ -38,7 +38,7 @@ function Navbar() {
                             }>
                                 Today's Special
                             </NavLink>
-                            <NavLink to="/" className={({ isActive }) =>
+                            <NavLink to="/whyus" className={({ isActive }) =>
                                 `${isActive ? "text-red-500" : "text-[#191919]"} text-xl font-medium hover:text-red-500`
                             }>
                                 Why Us
@@ -55,17 +55,12 @@ function Navbar() {
                                     Add Food
                                 </NavLink>)
                             }
-                            <NavLink to="/" className={({ isActive }) =>
-                                `${isActive ? "text-red-500" : "text-[#191919]"} text-xl font-medium hover:text-red-500`
-                            }>
-                                Popular Food
-                            </NavLink>
 
                             <div className="dropdown dropdown-end">
                                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                                     <div className="indicator">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                                        <span className="badge badge-sm text-red-500 indicator-item">8</span>
+                                        <span className="badge badge-sm text-red-500 indicator-item">{cartItems?.length}</span>
                                     </div>
                                 </div>
                                 <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-red-100 shadow">
@@ -94,7 +89,6 @@ function Navbar() {
                                                     Profile
                                                 </Link>
                                             </li>
-                                            <li><Link>Settings</Link></li>
                                             <li><Link><button className="bg-[#F54748] active:scale-90 transition duration-100 transform hover:shadow-xl shadow-md rounded-full px-2 py-1 text-sm font-medium text-white"
                                                 onClick={() => {
                                                     localStorage.clear()
@@ -126,7 +120,7 @@ function Navbar() {
                             }>
                                 Today's Special
                             </NavLink>
-                            <NavLink to="/" className={({ isActive }) =>
+                            <NavLink to="/whyus" className={({ isActive }) =>
                                 `${isActive ? "text-red-500" : "text-[#191919]"} text-base font-medium hover:text-red-500`
                             }>
                                 Why Us
@@ -142,25 +136,21 @@ function Navbar() {
                                 Add Food
                             </NavLink>)
                             }
-                            <NavLink to="/" className={({ isActive }) =>
-                                `${isActive ? "text-red-500" : "text-[#191919]"} text-base font-medium hover:text-red-500`
-                            }>
-                                Popular Food
-                            </NavLink>
 
                             <div className="dropdown dropdown-end">
                                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                                     <div className="indicator">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                                        <span className="badge badge-sm text-red-500 indicator-item">8</span>
+                                        <span className="badge badge-sm text-red-500 indicator-item">{cartItems?.length}</span>
                                     </div>
                                 </div>
                                 <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-red-100 shadow">
                                     <div className="card-body">
-                                        <span className="font-bold text-lg">8 Items</span>
-                                        <span className="text-info">Subtotal: $999</span>
+                                        <span className="font-bold text-lg">{cartItems?.length || 0} Items</span>
                                         <div className="card-actions">
-                                            <button className="btn btn-primary btn-block">View cart</button>
+                                            <Link to="viewcart">
+                                                <button className="bg-[#f54748] active:scale-90 transition duration-150 transform shadow-md hover:shadow-xl rounded-full px-3 py-2 text-xl fonr-medium text-white mx-auto text-center" type='submit'>View Cart</button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>

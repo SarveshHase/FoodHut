@@ -1,13 +1,13 @@
 import React from 'react'
 import { useCartContext } from '../../context/CartContext'
 import CartFood from '../components/CartFood'
+import { Link } from 'react-router-dom'
 
 function ViewCart() {
     const { cartItems, addToCart, removeItem } = useCartContext()
     const itemsPrice = cartItems.reduce((a, c) => a + (c.qty * c.price), 0)
-    const taxPrice = itemsPrice * 0.14;
-    const shippingPrice = itemsPrice > 2000 ? 0 : 20;
-    const totalPrice = itemsPrice + shippingPrice + taxPrice;
+    const taxPrice = (itemsPrice * 0.14).toFixed(3);
+    const totalPrice = itemsPrice + parseInt(taxPrice);
     return (
         <div className="pt-14">
             <div className={cartItems?.length === 0 ? "bg-gray-100 h-96" : "bg-gray-100"}>
@@ -49,14 +49,12 @@ function ViewCart() {
                                 "mx-auto justify-center px-6 flex-col"
                         }>
                             <div className="text-right mb-2 font-semibold text-red-900 ">
-                                Shipping: <span>&#8377;</span>{shippingPrice}
-                            </div>
-                            <div className="text-right mb-2 font-semibold text-red-900 ">
                                 Total Price: <span>&#8377;</span>{totalPrice}
                             </div>
-                            <div className="btn text-right text-white hover:bg-red-600 hover:border-red-500 btn-sm bg-red-500">
+                            <Link to="/order"><button className="btn text-right text-white hover:bg-red-600 hover:border-red-500 btn-sm bg-red-500">
                                 Check Out
-                            </div>
+                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

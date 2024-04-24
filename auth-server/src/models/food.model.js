@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const ReviewSchema = new mongoose.Schema({
+const reviewSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.ObjectId,
         ref: "User",
@@ -22,7 +22,7 @@ const ReviewSchema = new mongoose.Schema({
     }
 })
 
-const FoodSchema = new mongoose.Schema({
+const foodSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -43,7 +43,7 @@ const FoodSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    reviews: [ReviewSchema],
+    reviews: [reviewSchema],
     foodImage: {
         type: String,
         required: true
@@ -51,4 +51,4 @@ const FoodSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 
-export const Food = mongoose.model("Food", FoodSchema);
+export const Food = mongoose.model("Food", foodSchema);

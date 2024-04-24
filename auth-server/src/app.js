@@ -15,9 +15,11 @@ app.get('/', (req, res) => {
 import imageRoute from "./routes/image.route.js"
 import userRoute from "./routes/user.route.js"
 import foodRoute from "./routes/food.route.js"
+import orderRoute from "./routes/order.route.js"
 app.use('/api/v1/all', imageRoute)
 app.use('/api/v1/user', userRoute)
 app.use('/api/v1/food', foodRoute)
+app.use('/api/v1/order', orderRoute)
 
 
 export { app }
