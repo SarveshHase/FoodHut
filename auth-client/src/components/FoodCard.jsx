@@ -2,9 +2,12 @@ import React from 'react';
 import { FaHeart, FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { useCartContext } from '../../context/CartContext';
+import LoadingBar from 'react-top-loading-bar'
+import { useLoaderContext } from '../../context/Loadercontext';
 
 function FoodCard({ currEle }) {
     const { cartItems, addToCart, removeItem } = useCartContext();
+    const { manageProgress } = useLoaderContext();
 
     // Helper function to check if item is in cart
     const isInCart = (item) => {
@@ -13,6 +16,7 @@ function FoodCard({ currEle }) {
 
     // Toggle add or remove from cart
     const toggleCartItem = (item) => {
+        manageProgress();
         if (isInCart(item)) {
             removeItem(item);
         } else {

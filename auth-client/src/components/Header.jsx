@@ -13,7 +13,7 @@ function Header() {
                         </div>
 
                         <div className="lg:text-xl text-[#191919] md:text-lg text-base">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, ratione architecto cum aliquid ea fugit repudiandae veritatis aspernatur iure omnis impedit vel optio suscipit dolor voluptas molestiae dignissimos quam magnam dolore. Eos magnam at, accusantium voluptatum, nam corporis quas eligendi repudiandae, odio quidem doloremque dicta debitis voluptate saepe laborum vitae.
+                            Our website offers a streamlined food ordering system designed to cater to your culinary needs with ease and efficiency. Explore a vast menu of delicious options ranging from local favorites to international cuisines, all available at your fingertips. Each food item is presented with high-quality images and detailed descriptions, ensuring you know exactly what you're ordering. Experience the joy of dining with just a few clicks, anytime, anywhere.
                         </div>
 
                         <div className="flex rounded py-2 px-4 justify-between items-center bg-white shadow-md">

@@ -1,7 +1,11 @@
 import React from 'react'
 import chef from '../assets/chef.png'
+import { Link, useNavigate } from 'react-router-dom'
+import { useLoaderContext } from "../../context/Loadercontext"
 
 function Service() {
+    const { progress, setProgress, manageProgress } = useLoaderContext()
+    const navigate = useNavigate()
     return (
         <div className="py-3 px-10 sm:px-4 md:px-6 lg:px-6">
             <div className="container mx-auto py-[2vh]">
@@ -17,9 +21,13 @@ function Service() {
                         <div className="lg:text-lg text-[#191919] md:text-base text-sm">
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias impedit ab ipsum iusto fugiat doloribus a excepturi odio labore architecto.
                         </div>
-                        <div className="flex gap-8 items-center">
+                        <Link to="/whyus" className="flex gap-8 items-center" onClick={(e) => {
+                            e.preventDefault();
+                            manageProgress();
+                            navigate('/whyus');
+                        }}>
                             <button className="bg-[#f54748] active:scale-90 transition transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white">About Us</button>
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>

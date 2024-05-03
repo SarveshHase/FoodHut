@@ -5,13 +5,20 @@ import './App.css'
 import Navbar from './Shared/Navbar'
 import Footer from './Shared/Footer'
 import { Outlet } from 'react-router-dom'
-
+import LoadingBar from 'react-top-loading-bar';  // Adjust the import path as necessary
+import { useLoaderContext } from '../context/Loadercontext'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { progress, setProgress } = useLoaderContext();  // Access progress and setProgress from context
 
   return (
     <>
+      <LoadingBar
+        color='#f11946'
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+        height={3}
+      />
       <Navbar />
       <Outlet />
       <Footer />

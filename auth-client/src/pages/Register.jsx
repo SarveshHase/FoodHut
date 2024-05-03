@@ -9,7 +9,7 @@ function Register() {
     const [image, setImage] = useState({})
     const [uploading, setUploading] = useState(false)
     const navigate = useNavigate()
-    
+
 
     const handleImage = async (e) => {
         const file = e.target.files[0];
@@ -72,7 +72,7 @@ function Register() {
                     <label htmlFor='file-upload' className='custom-file-upload'>
                         <img src={image?.url || avatar} alt="" className='h-32 w-32 bg-contain rounded-full mx-auto cursor-pointer' />
                     </label>
-                    <label className='block text-center text-gray-900 text-base mb-2'>Profile Picture</label>
+                    <label className='block text-center text-gray-900 text-base mb-2'>Upload your profile picture</label>
                     <input type="file" label='Image' name='myFile' id='file-upload' className='hidden' accept=' .jpeg, .png, .jpg' onChange={handleImage} />
 
                     <div className="mb-3">

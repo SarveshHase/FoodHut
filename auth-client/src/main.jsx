@@ -32,6 +32,7 @@ import {
 } from '@stripe/react-stripe-js';
 import AboutUs from './pages/AboutUs.jsx'
 import MyOrder from './pages/MyOrder.jsx'
+import { LoaderProvider } from '../context/Loadercontext.jsx'
 
 const stripePromise = loadStripe("pk_test_51P8yUASBcXYQPFot2tlwiuyxdsN58tEeXhPywUqkoj9mwiCpHCHiCMmOTUNWQCTFu5A8VMCCEhVYGnmIUHOHANCv00S6OUpavl");
 
@@ -64,12 +65,14 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <UserProvider>
-      <FoodProvider>
-        <CartProvider>
-          <RouterProvider router={router} />
-        </CartProvider>
-      </FoodProvider>
-    </UserProvider>
+    <LoaderProvider>
+      <UserProvider>
+        <FoodProvider>
+          <CartProvider>
+            <RouterProvider router={router} />
+          </CartProvider>
+        </FoodProvider>
+      </UserProvider>
+    </LoaderProvider>
   </React.StrictMode>,
 )

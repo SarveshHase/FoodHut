@@ -92,18 +92,30 @@ function Profile() {
                         </div>
 
                         <div className="mb-3">
+                            <label htmlFor="city" className="block text-gray-700 text-sm mb-2">
+                                City:
+                            </label>
                             <input type="text" id='city' name='city' placeholder={user?.user?.city || "City"} className="shadow-sm bg-white appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-md" />
                         </div>
 
                         <div className="mb-3">
+                            <label htmlFor="district" className="block text-gray-700 text-sm mb-2">
+                                District:
+                            </label>
                             <input type="text" id='district' name='district' placeholder={user?.user?.district || "District"} className="shadow-sm bg-white appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-md" />
                         </div>
 
                         <div className="mb-3">
+                            <label htmlFor="state" className="block text-gray-700 text-sm mb-2">
+                                State:
+                            </label>
                             <input type="text" id='state' name='state' placeholder={user?.user?.state || "State"} className="shadow-sm bg-white appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-md" />
                         </div>
 
                         <div className="mb-3">
+                            <label htmlFor="zipcode" className="block text-gray-700 text-sm mb-2">
+                                Zipcode:
+                            </label>
                             <input type="text" id='zipcode' name='zipcode' placeholder={user?.user?.zipcode || "Zip code"} className="shadow-sm bg-white appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-md" />
                         </div>
                     </div>
