@@ -11,7 +11,7 @@ function NewFoods() {
 
     const getFoods = async () => {
         try {
-            const res = await axios.get(`http://localhost:8000/api/v1/food/getnewFoods`)
+            const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/food/getnewFoods`)
 
             if (res.data.success) {
                 setNewFood(res.data.data.foodItems)

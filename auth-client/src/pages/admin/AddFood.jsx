@@ -20,7 +20,7 @@ function AddFood() {
         formData.append('image', file)
         setUploading(true)
         try {
-            const { data } = await axios.post('http://localhost:8000/api/v1/all/upload-image', formData)
+            const { data } = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/all/upload-image`, formData)
             setUploading(false)
             setImage({
                 url: data.url,
@@ -48,7 +48,7 @@ function AddFood() {
         const foodData = { name: foodName, price, category: categoryTemp, weight, location, description, foodImage }
         // console.log(foodData);
 
-        const res = await axios.post("http://localhost:8000/api/v1/food/addFood",
+        const res = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/food/addFood`,
             { foodData },
             {
                 headers: {

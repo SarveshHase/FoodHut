@@ -14,7 +14,7 @@ function MyOrder() {
 
     const getMyOrder = async () => {
         try {
-            const res = await axios.post(`http://localhost:8000/api/v1/order/getorder`, {
+            const res = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/order/getorder`, {
                 userId: user?.user?._id,
                 token: localStorage.getItem("token")
             }, {
@@ -147,12 +147,12 @@ function FoodCart({ food }) {
 
 
             <div className="flex justify-center w-1/5 cursor-pointer">
-                    {
-                        food?.payment === false && <span className='font-bold text-sm'>Not paid</span>
-                    }
-                    {
-                        food?.payment && <span className='font-bold text-green-600 text-sm'>Paid</span>
-                    }
+                {
+                    food?.payment === false && <span className='font-bold text-sm'>Not paid</span>
+                }
+                {
+                    food?.payment && <span className='font-bold text-green-600 text-sm'>Paid</span>
+                }
             </div>
             <div className="flex justify-center w-1/5 cursor-pointer">
                 <span className='font-bold text-sm'>{food?.status}</span>

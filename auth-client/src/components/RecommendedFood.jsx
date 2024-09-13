@@ -11,7 +11,7 @@ function RecommendedFood() {
 
     const getRatedFoods = async () => {
         try {
-            const res = await axios.get(`http://localhost:8000/api/v1/food/getTopRated`)
+            const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/food/getTopRated`)
 
             if (res.data.success) {
                 setRatedFood(res.data.data.foodItems)

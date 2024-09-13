@@ -11,7 +11,7 @@ function OrderFoods() {
     const handleDelivered = async (id) => {
         try {
             console.log(id);
-            const res = await axios.post(`http://localhost:8000/api/v1/order/status`, {
+            const res = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/order/status`, {
                 userId: user?.user?._id,
                 orderId: id,
                 token: localStorage.getItem("token")

@@ -15,7 +15,7 @@ function Login() {
         const userData = { email, password }
         console.log(userData);
 
-        fetch('http://localhost:8000/api/v1/user/login', {
+        fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/user/login`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"

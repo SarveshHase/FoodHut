@@ -17,7 +17,7 @@ function Register() {
         formData.append('image', file)
         setUploading(true)
         try {
-            const { data } = await axios.post('http://localhost:8000/api/v1/all/upload-image', formData)
+            const { data } = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/all/upload-image`, formData)
             setUploading(false)
             setImage({
                 url: data.url,
@@ -40,7 +40,7 @@ function Register() {
         const userData = { name, email, password, passwordConfirm, avatar }
         console.log(userData);
 
-        fetch('http://localhost:8000/api/v1/user/register', {
+        fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/user/register`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"

@@ -23,7 +23,7 @@ function VerifyOtp() {
         const dataOtp = { email, combineOtp }
         // console.log(combineOtp);
 
-        fetch('http://localhost:8000/api/v1/user/verifyotp', {
+        fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/user/verifyotp`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"

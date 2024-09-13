@@ -33,7 +33,7 @@ function Order() {
                     qty: item.qty
                 }
             ))
-            const res = await axios.post(`http://localhost:8000/api/v1/order/order`, {
+            const res = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/order/order`, {
                 user: user?.user?._id,
                 items: orderItems,
                 totalAmount: totalPrice,

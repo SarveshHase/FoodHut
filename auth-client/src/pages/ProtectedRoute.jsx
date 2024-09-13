@@ -16,7 +16,7 @@ export default function ProtectedRoute({ children }) {
           return;
         }
 
-        const res = await axios.post("http://localhost:8000/api/v1/user/get-user", null, {
+        const res = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/user/get-user`, null, {
           headers: {
             Authorization: `Bearer ${token}`
           }
