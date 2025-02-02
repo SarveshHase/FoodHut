@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useUserContext } from '../../context/UserContext'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 function VerifyOtp() {
     const [otp, setOtp] = useState(['', '', '', '', '', ''])
-    const { user, setUser } = useUserContext()
+    const { user } = useUserContext()
     const navigate = useNavigate()
 
     const handleInputChange = (index, value) => {

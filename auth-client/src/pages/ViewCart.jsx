@@ -1,10 +1,9 @@
-import React from 'react'
 import { useCartContext } from '../../context/CartContext'
 import CartFood from '../components/CartFood'
 import { Link } from 'react-router-dom'
 
 function ViewCart() {
-    const { cartItems, addToCart, removeItem } = useCartContext()
+    const { cartItems } = useCartContext()
     const itemsPrice = cartItems.reduce((a, c) => a + (c.qty * c.price), 0)
     const taxPrice = (itemsPrice * 0.14).toFixed(3);
     const totalPrice = itemsPrice + parseInt(taxPrice);

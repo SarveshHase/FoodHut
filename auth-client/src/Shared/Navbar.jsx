@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import logo from '../assets/Logo.svg'
-import { Link, NavLink, Navigate, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { TiThMenu } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 import { useUserContext } from '../../context/UserContext';
@@ -10,7 +10,7 @@ import { useLoaderContext } from '../../context/Loadercontext';
 
 function Navbar() {
     const [nav, setNav] = useState(false);
-    const { user, setUser } = useUserContext();
+    const { user } = useUserContext();
     const navigate = useNavigate()
     console.log(user);
 
@@ -54,7 +54,7 @@ function Navbar() {
                                 manageProgress();
                                 navigate('/');
                             }}>
-                                Today's Special
+                                Today&apos;s Special
                             </NavLink>
                             <NavLink to="/whyus" className={({ isActive }) =>
                                 `${isActive ? "text-red-500" : "text-[#191919]"} text-xl font-medium hover:text-red-500`
@@ -167,7 +167,7 @@ function Navbar() {
                                 manageProgress();
                                 navigate('/');
                             }}>
-                                Today's Special
+                                Today&apos;s Special
                             </NavLink>
                             <NavLink to="/whyus" className={({ isActive }) =>
                                 `${isActive ? "text-red-500" : "text-[#191919]"} text-base font-medium hover:text-red-500`

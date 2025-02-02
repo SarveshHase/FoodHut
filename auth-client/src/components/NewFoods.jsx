@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { FaHeart } from "react-icons/fa";
-import { FaStar } from "react-icons/fa";
-import { useFoodContext } from '../../context/FoodContext';
+import { useEffect, useState } from 'react'
 import axios from 'axios';
 import FoodCard from './FoodCard';
 
 function NewFoods() {
     const [newFood, setNewFood] = useState([])
-    const { food, setFood } = useFoodContext()
 
     const getFoods = async () => {
         try {

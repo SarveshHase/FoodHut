@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useFoodContext } from '../../context/FoodContext'
 import axios from 'axios'
@@ -57,22 +57,21 @@ function Menu() {
     setValue(btn)
   }
 
-  const getFoods = async () => {
+  const getFoods = useCallback(async () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/food/getAllFoods?category=${value.value}`)
-
       if (res.data.success) {
         setFood(res.data.data.foodItems)
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  }, [value.value, setFood]);
 
   console.log(food);
   useEffect(() => {
     getFoods()
-  }, [value])
+  }, [getFoods])
 
 
   return (

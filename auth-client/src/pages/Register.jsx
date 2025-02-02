@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import avatar from '../assets/avatar.png'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from "axios";
@@ -101,7 +101,13 @@ function Register() {
                             <input type="password" id='confirmPassword' name='confirmPassword' placeholder='********' className="shadow-sm bg-white appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-md" />
                         </div>
                     </div>
-                    <button className="bg-[#f54748] active:scale-90 transition duration-150 transform shadow-md hover:shadow-xl w-full rounded-full px-8 py-2 text-xl fonr-medium text-white mx-auto text-center" type='submit'>Register</button>
+                    <button
+                        className="bg-[#f54748] active:scale-90 transition duration-150 transform shadow-md hover:shadow-xl w-full rounded-full px-8 py-2 text-xl fonr-medium text-white mx-auto text-center"
+                        type='submit'
+                        disabled={uploading}
+                    >
+                        {uploading ? 'Uploading...' : 'Register'}
+                    </button>
 
                     <div className="flex items-center justify-between">
                         <Link to='/login' className='text-[#fdc55e] text-center font-semibold w-full mb-3 py-2 px-4 rounded hover:underline hover:underline-offset-4 active:scale-90 transition duration-150 transform'>

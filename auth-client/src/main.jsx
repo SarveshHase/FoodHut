@@ -21,14 +21,11 @@ import ViewCart from './pages/ViewCart.jsx'
 import Success from './pages/Success.jsx'
 import Cancel from './pages/Cancel.jsx'
 import Order from './pages/Order.jsx'
-
+import AllOrders from './pages/admin/AllOrders.jsx'
 
 import { loadStripe } from '@stripe/stripe-js';
 import {
-  PaymentElement,
-  Elements,
-  useStripe,
-  useElements,
+  Elements
 } from '@stripe/react-stripe-js';
 import AboutUs from './pages/AboutUs.jsx'
 import MyOrder from './pages/MyOrder.jsx'
@@ -47,6 +44,7 @@ const router = createBrowserRouter(
       <Route path='/verifyOtp' element={<ProtectedRoute> <VerifyOtp /> </ProtectedRoute>} />
       < Route path='/error' element={< Error />} />
       <Route path='/admin/addFood' element={<ProtectedRoute><AdminRoute><AddFood /></AdminRoute></ProtectedRoute>} />
+      <Route path='/admin/orders' element={<ProtectedRoute><AdminRoute><AllOrders /></AdminRoute></ProtectedRoute>} />
       < Route path='/menu' element={<ProtectedRoute> <Menu /> </ProtectedRoute>} />
       <Route path='/menu/:id' element={<ProtectedRoute> <FoodDetails /> </ProtectedRoute>} />
       <Route path='/profile' element={<ProtectedRoute> <Profile /> </ProtectedRoute>} />

@@ -1,4 +1,3 @@
-import React from 'react'
 import { FaSearch } from "react-icons/fa";
 import header from '../assets/banner.png'
 
@@ -13,7 +12,7 @@ function Header() {
                         </div>
 
                         <div className="lg:text-xl text-[#191919] md:text-lg text-base">
-                            Our website offers a streamlined food ordering system designed to cater to your culinary needs with ease and efficiency. Explore a vast menu of delicious options ranging from local favorites to international cuisines, all available at your fingertips. Each food item is presented with high-quality images and detailed descriptions, ensuring you know exactly what you're ordering. Experience the joy of dining with just a few clicks, anytime, anywhere.
+                            Our website offers a streamlined food ordering system designed to cater to your culinary needs with ease and efficiency. Explore a vast menu of delicious options ranging from local favorites to international cuisines, all available at your fingertips. Each food item is presented with high-quality images and detailed descriptions, ensuring you know exactly what you&apos;re ordering. Experience the joy of dining with just a few clicks, anytime, anywhere.
                         </div>
 
                         <div className="flex rounded py-2 px-4 justify-between items-center bg-white shadow-md">

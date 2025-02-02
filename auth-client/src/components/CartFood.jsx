@@ -1,10 +1,10 @@
-import React from 'react'
+import PropTypes from 'prop-types'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { useCartContext } from '../../context/CartContext';
 
 function CartFood({ food }) {
-    const { cartItems, removeItem, addToCart } = useCartContext();
-    
+    const { removeItem, addToCart } = useCartContext();
+
     // console.log("Food: ", food);
 
     return (
@@ -47,6 +47,17 @@ function CartFood({ food }) {
             </span>
         </div>
     )
+}
+
+CartFood.propTypes = {
+    food: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        foodImage: PropTypes.string.isRequired,
+        category: PropTypes.string.isRequired,
+        qty: PropTypes.number.isRequired
+    }).isRequired
 }
 
 export default CartFood

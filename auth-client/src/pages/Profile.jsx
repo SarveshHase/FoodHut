@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUserContext } from '../../context/UserContext';
@@ -7,7 +7,7 @@ import axios from 'axios';
 
 function Profile() {
     const [image, setImage] = useState({})
-    const [uploading, setUploading] = useState(false)
+    const [setUploading] = useState(false)
     const navigate = useNavigate()
     const { user } = useUserContext()
 

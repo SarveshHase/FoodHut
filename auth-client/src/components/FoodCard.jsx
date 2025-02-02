@@ -1,65 +1,68 @@
-import React from 'react';
-import { FaHeart, FaStar } from "react-icons/fa";
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useCartContext } from '../../context/CartContext';
-import LoadingBar from 'react-top-loading-bar'
 import { useLoaderContext } from '../../context/Loadercontext';
+import { toast } from 'react-toastify';
 
 function FoodCard({ currEle }) {
     const { cartItems, addToCart, removeItem } = useCartContext();
     const { manageProgress } = useLoaderContext();
 
-    // Helper function to check if item is in cart
-    const isInCart = (item) => {
-        return cartItems.some(cartItem => cartItem._id === item._id);
-    };
+    const isInCart = cartItems.some(item => item._id === currEle._id);
 
-    // Toggle add or remove from cart
-    const toggleCartItem = (item) => {
+    const handleCartAction = (e) => {
+        e.preventDefault(); // Prevent navigation when clicking the button
+
         manageProgress();
-        if (isInCart(item)) {
-            removeItem(item);
+        if (isInCart) {
+            removeItem(currEle);
+            toast.success("Removed from cart!");
         } else {
+            const item = {
+                ...currEle,
+                qty: 1  // Default quantity when adding from card
+            };
             addToCart(item);
+            toast.success("Added to cart!");
         }
     };
 
     return (
-        <div className="food-card bg-red-500/10 rounded-xl flex flex-col justify-between cursor-pointer items-center p-5">
-            <div className="relative mb-3">
-                <Link to={`/menu/${currEle?._id}`}>
-                    <img src={currEle?.foodImage} alt="" />
-                </Link>
-                <div className="absolute top-2 left-2">
-                    <button className="shadow-sm text-white bg-red-500 hover:bg-red-700 cursor-pointer p-5 rounded-full relative">
-                        <FaHeart className='absolute text-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' />
-                    </button>
+        <Link to={`/menu/${currEle?._id}`}>
+            <div className="food-card bg-red-200/[0.3] rounded-xl flex flex-col cursor-pointer items-center p-5">
+                <div className="relative inline-block">
+                    <img src={currEle?.foodImage} alt="" className='w-40 h-40 hover:scale-110 transition-all duration-500 cursor-pointer' />
                 </div>
 
-                <div className="absolute bottom-2 right-2">
-                    <button className="shadow-sm text-white bg-[#fdc55e] cursor-pointer p-3 h-14 w-14 text-xl font-bold rounded-full relative">
-                        <div className="absolute text-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "><span>&#8377;</span>{currEle.price}</div>
-                    </button>
-                </div>
-            </div>
-            <div>
-                <div className="flex gap-4 items-center">
-                    <p className="text-xl text-bold text-[#f54748]">
-                        {currEle.name}
+                <div className="flex flex-col items-center mt-3 space-y-3">
+                    <h3 className="font-semibold text-xl text-center min-h-[56px]">
+                        {currEle?.name}
+                    </h3>
+                    <p className="text-lg text-[#f54748]">
+                        <span>₹</span>{currEle?.price}
                     </p>
-                    <div className="flex flex-sm space-x-2 cursor-pointer">
-                        <span className="font-normal text-[#fdc55e]">4.3</span>
-                        <FaStar className='text-[#fdc55e]' size={16} />
-                        <span className="font-medium">({currEle?.reviews.length})</span>
-                    </div>
+                    <button
+                        onClick={handleCartAction}
+                        className={`active:scale-90 transition duration-150 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium ${isInCart
+                            ? 'bg-white text-[#f54748] border-2 border-[#f54748]'
+                            : 'bg-[#f54748] text-white'
+                            }`}
+                    >
+                        {isInCart ? 'Remove from Cart' : 'Add To Cart'}
+                    </button>
                 </div>
-
-                <button className="bg-[#f54748] active:scale-90 transition duration-150 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white" onClick={() => toggleCartItem(currEle)}>
-                    {isInCart(currEle) ? 'Remove From Cart' : 'Add To Cart'}
-                </button>
             </div>
-        </div>
+        </Link>
     )
+}
+
+FoodCard.propTypes = {
+    currEle: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        foodImage: PropTypes.string.isRequired
+    }).isRequired
 }
 
 export default FoodCard;

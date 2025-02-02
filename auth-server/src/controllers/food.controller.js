@@ -54,54 +54,42 @@ const createFoodController = async (req, res) => {
 
 const getAllFoodsController = async (req, res) => {
     try {
-        const { category } = req.query
-        // console.log(category);
-        let foodItems = null
+        const { category } = req.query;
+        let foodItems = null;
 
+        // Use MongoDB's built-in escaping and validation
         if (category === "all") {
-            foodItems = await Food.find();
+            foodItems = await Food.find({}).lean();
         } else {
-            foodItems = await Food.find({ category: category });
+            // Validate category format before querying
+            const isValidCategory = /^[a-zA-Z0-9\s-]+$/.test(category);
+            if (!isValidCategory) {
+                return res.status(400).json(
+                    new ApiResponse(400, {}, "Invalid category format")
+                );
+            }
+
+            foodItems = await Food.find({
+                category: category  // MongoDB automatically escapes the query
+            }).lean();
         }
-
-
 
         if (!foodItems) {
-            return res
-                .status(200)
-                .json(
-                    new ApiResponse(
-                        500,
-                        {},
-                        "Error while getting Food items"
-                    )
-                )
+            return res.status(200).json(
+                new ApiResponse(500, {}, "Error while getting Food items")
+            );
         }
 
-        return res
-            .status(200)
-            .json(
-                new ApiResponse(
-                    200,
-                    {
-                        foodItems
-                    },
-                    "Food fetched successfully"
-                )
-            )
+        return res.status(200).json(
+            new ApiResponse(200, { foodItems }, "Food fetched successfully")
+        );
     } catch (error) {
-        console.log("Error in createFoodController: ", error.message);
-        return res
-            .status(200)
-            .json(
-                new ApiResponse(
-                    500,
-                    {},
-                    "Internal server error while getting food items"
-                )
-            )
+        console.log("Error in getAllFoodsController: ", error.message);
+        return res.status(200).json(
+            new ApiResponse(500, {}, "Internal server error while getting food items")
+        );
     }
-}
+};
 
 const getFoodByIdController = async (req, res) => {
     try {

@@ -1,10 +1,9 @@
-import React from 'react'
 import chef from '../assets/chef2.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useLoaderContext } from "../../context/Loadercontext"
 
 function Service() {
-    const { progress, setProgress, manageProgress } = useLoaderContext()
+    const { manageProgress } = useLoaderContext()
     const navigate = useNavigate()
 
     return (

@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 export default function ProtectedRoute({ children }) {
   const { user, setUser } = useUserContext();
@@ -44,3 +45,7 @@ export default function ProtectedRoute({ children }) {
   // If user is authenticated, render the children components
   return children;
 }
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.node.isRequired
+};

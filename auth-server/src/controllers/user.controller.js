@@ -114,6 +114,16 @@ const registerController = async (req, res) => {
                 )
             });
 
+            // Set secure cookie options
+            const cookieOptions = {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+                maxAge: 24 * 60 * 60 * 1000 // 24 hours
+            };
+
+            res.cookie('token', token, cookieOptions);
+
             return res
                 .status(200)
                 .json(
@@ -121,7 +131,6 @@ const registerController = async (req, res) => {
                         200,
                         {
                             user: newUser,
-                            token,
                         },
                         `User with name ${name} registered successfully`
                     )

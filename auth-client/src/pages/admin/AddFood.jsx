@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import logo from '../../assets/Logo.svg'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -38,33 +38,39 @@ function AddFood() {
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
-        const foodName = form.name.value;
-        const price = form.price.value;
-        const categoryTemp = category;
-        const weight = form.weight.value;
-        const location = form.location.value;
-        const description = form.description.value;
-        const foodImage = image?.url || "";
-        const foodData = { name: foodName, price, category: categoryTemp, weight, location, description, foodImage }
-        // console.log(foodData);
+        const foodData = {
+            name: form.name.value,
+            price: form.price.value,
+            category: category,
+            weight: form.weight.value,
+            description: form.description.value,
+            foodImage: image?.url || ""
+        };
 
-        const res = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/food/addFood`,
-            { foodData },
-            {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
+        try {
+            const res = await axios.post(
+                `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/food/addFood`,
+                { foodData },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
                 }
-            })
+            );
 
-        // console.log(res);
-
-        if (res.data.success) {
-            toast.success(res.data.message)
-            form.reset();
-        } else {
-            toast.error(res.data.message)
+            if (res.data.success) {
+                toast.success(res.data.message);
+                form.reset();
+                setCategory('');
+                setImage({});
+            } else {
+                toast.error(res.data.message);
+            }
+        } catch (error) {
+            console.error("Error adding food:", error);
+            toast.error("Failed to add food");
         }
-    }
+    };
 
     return (
         <div className="addfood">
@@ -74,39 +80,47 @@ function AddFood() {
                         <img src={logo} alt="" className='logo mb-9 cursor-pointer text-center' />
                     </NavLink>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-6">
                         <div className="mb-3">
                             <label htmlFor="name" className="block text-gray-700 text-sm mb-2">
                                 Food Name
                             </label>
-                            <input type="text" id='name' name='name' placeholder='Enter food Name' className="input shadow-sm bg-white appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-md" />
-                        </div>
-
-                        <div className="mb-3">
-                            <label htmlFor="myFile" className="block text-gray-700 text-sm mb-2">
-                                Upload Food Image
-                            </label>
-                            <input type="file" name='myFile' accept=' .jpeg, .png, .jpg' className="file-input file-input-bordered file-input-md w-full bg-red-500 text-gray-200 " onChange={handleImage} />
+                            <input
+                                type="text"
+                                id='name'
+                                name='name'
+                                placeholder='Enter food Name'
+                                className="input shadow-sm bg-white appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-md"
+                                required
+                            />
                         </div>
 
                         <div className="mb-3">
                             <label htmlFor="price" className="block text-gray-700 text-sm mb-2">
-                                Price
+                                Price (₹)
                             </label>
-                            <input type="number" id='price' name='price' placeholder='Enter price' className="shadow-sm bg-white appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-md" />
+                            <input
+                                type="number"
+                                id='price'
+                                name='price'
+                                placeholder='Enter price'
+                                className="shadow-sm bg-white appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-md"
+                                required
+                            />
                         </div>
 
                         <div className="mb-3">
                             <label htmlFor="category" className="block text-gray-700 text-sm mb-2">
-                                Select Category
+                                Category
                             </label>
                             <select
-                                className="select select-md w-full max-w-xs bg-red-500 text-white"
+                                className="select select-md w-full bg-red-500 text-white"
                                 name="category"
-                                value={category} // Set the value of select to the state
-                                onChange={handleCategory} // Update state when the user selects an option
+                                value={category}
+                                onChange={handleCategory}
+                                required
                             >
-                                <option disabled value="">Category</option>
+                                <option disabled value="">Select Category</option>
                                 <option value="Starter">Starter</option>
                                 <option value="Desert">Desert</option>
                                 <option value="Drinks">Drinks</option>
@@ -120,24 +134,51 @@ function AddFood() {
                             <label htmlFor="weight" className="block text-gray-700 text-sm mb-2">
                                 Weight (in grams)
                             </label>
-                            <input type="number" id='weight' name='weight' placeholder='Enter weight in grams' className="shadow-sm bg-white appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-md" />
+                            <input
+                                type="number"
+                                id='weight'
+                                name='weight'
+                                placeholder='Enter weight in grams'
+                                className="shadow-sm bg-white appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-md"
+                                required
+                            />
                         </div>
 
                         <div className="mb-3">
-                            <label htmlFor="location" className="block text-gray-700 text-sm mb-2">
-                                Location
+                            <label htmlFor="myFile" className="block text-gray-700 text-sm mb-2">
+                                Food Image
                             </label>
-                            <input type="text" id='location' name='location' placeholder='Enter location' className="shadow-sm bg-white appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-md" />
+                            <input
+                                type="file"
+                                name='myFile'
+                                accept='.jpeg, .png, .jpg'
+                                className="file-input file-input-bordered file-input-md w-full bg-red-500 text-gray-200"
+                                onChange={handleImage}
+                                required
+                            />
                         </div>
 
                         <div className="mb-3 col-span-2">
                             <label htmlFor="description" className="block text-gray-700 text-sm mb-2">
                                 Description
                             </label>
-                            <textarea name='description' className="textarea textarea-ghost shadow-sm bg-white appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-md" placeholder="Enter description" />
+                            <textarea
+                                name='description'
+                                className="textarea textarea-ghost shadow-sm bg-white appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-md"
+                                placeholder="Enter description"
+                                rows="4"
+                                required
+                            />
                         </div>
                     </div>
-                    <button className="bg-[#f54748] active:scale-90 transition duration-150 transform shadow-md hover:shadow-xl w-full rounded-full px-8 py-2 mt-6 text-xl fonr-medium text-white mx-auto text-center" type='submit'>Add Food</button>
+
+                    <button
+                        className="bg-[#f54748] active:scale-90 transition duration-150 transform shadow-md hover:shadow-xl w-full rounded-full px-8 py-2 mt-6 text-xl font-medium text-white mx-auto text-center"
+                        type='submit'
+                        disabled={uploading}
+                    >
+                        {uploading ? 'Uploading...' : 'Add Food'}
+                    </button>
                     <ToastContainer />
                 </form>
             </div>

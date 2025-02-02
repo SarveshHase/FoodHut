@@ -16,6 +16,6 @@ router.route("/getAllFoods").get(getAllFoodsController);
 router.route("/getNewFoods").get(getNewFoodsController);
 router.route("/specialFoods").get(getFoodsFromDistinctCategoriesController);
 router.route("/getTopRated").get(getTopRatedFoodsController);
-router.route("/getFoodDetails/:id").get(getFoodByIdController);
+router.get('/food/:id([0-9a-fA-F]{24})', getFoodByIdController);
 
 export default router

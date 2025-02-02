@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import logo from '../assets/Logo.svg'
 import { ToastContainer, toast } from 'react-toastify';

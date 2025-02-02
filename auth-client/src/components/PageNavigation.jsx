@@ -1,5 +1,5 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 function PageNavigation({ title }) {
     return (
@@ -10,6 +10,10 @@ function PageNavigation({ title }) {
             </span>
         </div>
     )
+}
+
+PageNavigation.propTypes = {
+    title: PropTypes.string.isRequired
 }
 
 export default PageNavigation

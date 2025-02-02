@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useCartContext } from '../../context/CartContext'
 import { useUserContext } from '../../context/UserContext'
 import axios from 'axios'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from 'prop-types'
 
 function MyOrder() {
-    const { cartItems, addToCart, removeItem } = useCartContext()
-    const { user, setUser } = useUserContext();
+    const { cartItems } = useCartContext()
+    const { user } = useUserContext();
     const [orders, setOrders] = useState([]);
     const itemsPrice = cartItems.reduce((a, c) => a + (c.qty * c.price), 0)
     const taxPrice = (itemsPrice * 0.14).toFixed(3);
     const totalPrice = itemsPrice + parseInt(taxPrice);
 
-    const getMyOrder = async () => {
+    const getMyOrder = useCallback(async () => {
         try {
             const res = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/order/getorder`, {
                 userId: user?.user?._id,
@@ -33,11 +36,11 @@ function MyOrder() {
             console.log("Error in MyOrder file: ", error);
             toast.error("Something went wrong");
         }
-    }
+    }, [user?.user?._id]);
 
     useEffect(() => {
-        getMyOrder
-    }, [])
+        getMyOrder();
+    }, [getMyOrder]);
 
     console.log("Orders:", orders);
 
@@ -102,7 +105,6 @@ export default MyOrder
 
 
 function FoodCart({ food }) {
-    const { cartItems, removeItem, addToCart } = useCartContext();
 
     // console.log("Food: ", food);
 
@@ -165,4 +167,23 @@ function FoodCart({ food }) {
             </span>
         </div>
     )
+}
+
+FoodCart.propTypes = {
+    food: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        items: PropTypes.arrayOf(PropTypes.shape({
+            food: PropTypes.shape({
+                foodImage: PropTypes.string.isRequired,
+                name: PropTypes.string.isRequired
+            }),
+            qty: PropTypes.number.isRequired
+        })),
+        foodImage: PropTypes.string,
+        name: PropTypes.string,
+        payment: PropTypes.bool.isRequired,
+        status: PropTypes.string.isRequired,
+        createdAt: PropTypes.string.isRequired,
+        totalAmount: PropTypes.number.isRequired
+    }).isRequired
 }

@@ -1,5 +1,4 @@
-import React from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import logo from '../assets/Logo.svg'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,7 +10,7 @@ import {
 import axios from 'axios';
 
 function Order() {
-    const { cartItems, addToCart, removeItem } = useCartContext()
+    const { cartItems } = useCartContext()
     const itemsPrice = cartItems.reduce((a, c) => a + (c.qty * c.price), 0)
     const taxPrice = (itemsPrice * 0.14).toFixed(3);
     const totalPrice = itemsPrice + parseInt(taxPrice);
@@ -45,9 +44,11 @@ function Order() {
             })
 
             if (res.data.success) {
-                const result = await stripe.redirectToCheckout({
+                await stripe.redirectToCheckout({
                     sessionId: res.data.data.sessionId
-                })
+                }).catch(err => {
+                    toast.error("Payment redirect failed: " + err.message);
+                });
                 toast.success(res.data.message);
             } else {
                 toast.error(res.data.message);
