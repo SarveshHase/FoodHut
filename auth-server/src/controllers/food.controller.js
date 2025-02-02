@@ -229,6 +229,36 @@ const getTopRatedFoodsController = async (req, res) => {
     }
 };
 
+const searchFoodsController = async (req, res) => {
+    try {
+        const { term } = req.query;
+        
+        if (!term) {
+            return res.status(400).json(
+                new ApiResponse(400, {}, "Search term is required")
+            );
+        }
+
+        const searchRegex = new RegExp(term, 'i');
+        
+        const foodItems = await Food.find({
+            $or: [
+                { name: searchRegex },
+                { category: searchRegex },
+                { description: searchRegex }
+            ]
+        });
+
+        return res.status(200).json(
+            new ApiResponse(200, { foodItems }, "Search results fetched successfully")
+        );
+    } catch (error) {
+        console.error("Error in searchFoodsController:", error);
+        return res.status(500).json(
+            new ApiResponse(500, {}, "Internal server error while searching foods")
+        );
+    }
+};
 
 export {
     createFoodController,
@@ -236,5 +266,6 @@ export {
     getFoodByIdController,
     getNewFoodsController,
     getFoodsFromDistinctCategoriesController,
-    getTopRatedFoodsController
+    getTopRatedFoodsController,
+    searchFoodsController
 }

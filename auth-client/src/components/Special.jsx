@@ -20,7 +20,7 @@ function Special() {
 
     useEffect(() => {
         getSpecialFoods()
-    }, [specialFood])
+    }, [])
 
     return (
         <div className="py-3 px-10 sm:px-4 md:px-6">

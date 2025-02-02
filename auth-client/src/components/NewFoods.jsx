@@ -20,7 +20,7 @@ function NewFoods() {
     // console.log(newFood);
     useEffect(() => {
         getFoods()
-    }, [newFood])
+    }, [])
 
 
     return (

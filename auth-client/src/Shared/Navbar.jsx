@@ -12,7 +12,7 @@ function Navbar() {
     const [nav, setNav] = useState(false);
     const { user } = useUserContext();
     const navigate = useNavigate()
-    console.log(user);
+    // console.log(user);
 
     const handleNav = () => {
         setNav(!nav)

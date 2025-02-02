@@ -5,7 +5,8 @@ import {
     getFoodByIdController,
     getNewFoodsController,
     getFoodsFromDistinctCategoriesController,
-    getTopRatedFoodsController
+    getTopRatedFoodsController,
+    searchFoodsController
 } from "../controllers/food.controller.js";
 
 
@@ -17,5 +18,6 @@ router.route("/getNewFoods").get(getNewFoodsController);
 router.route("/specialFoods").get(getFoodsFromDistinctCategoriesController);
 router.route("/getTopRated").get(getTopRatedFoodsController);
 router.get('/food/:id([0-9a-fA-F]{24})', getFoodByIdController);
+router.get('/search', searchFoodsController);
 
 export default router

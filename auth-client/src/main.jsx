@@ -30,6 +30,8 @@ import {
 import AboutUs from './pages/AboutUs.jsx'
 import MyOrder from './pages/MyOrder.jsx'
 import { LoaderProvider } from '../context/Loadercontext.jsx'
+import { SearchProvider } from '../context/SearchContext'
+import SearchResults from './components/SearchResults.jsx'
 
 const stripePromise = loadStripe("pk_test_51P8yUASBcXYQPFot2tlwiuyxdsN58tEeXhPywUqkoj9mwiCpHCHiCMmOTUNWQCTFu5A8VMCCEhVYGnmIUHOHANCv00S6OUpavl");
 
@@ -39,25 +41,26 @@ const router = createBrowserRouter(
     <Route path='/' element={<App />}>
       <Route path='/' element={<ProtectedRoute> <Home /> </ProtectedRoute>} />
       <Route path='/whyus' element={<ProtectedRoute> <AboutUs /> </ProtectedRoute>} />
-      < Route path='/login' element={< Login />} />
-      < Route path='/register' element={< Register />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/register' element={<Register />} />
       <Route path='/verifyOtp' element={<ProtectedRoute> <VerifyOtp /> </ProtectedRoute>} />
-      < Route path='/error' element={< Error />} />
+      <Route path='/error' element={<Error />} />
       <Route path='/admin/addFood' element={<ProtectedRoute><AdminRoute><AddFood /></AdminRoute></ProtectedRoute>} />
       <Route path='/admin/orders' element={<ProtectedRoute><AdminRoute><AllOrders /></AdminRoute></ProtectedRoute>} />
-      < Route path='/menu' element={<ProtectedRoute> <Menu /> </ProtectedRoute>} />
+      <Route path='/menu' element={<ProtectedRoute> <Menu /> </ProtectedRoute>} />
       <Route path='/menu/:id' element={<ProtectedRoute> <FoodDetails /> </ProtectedRoute>} />
       <Route path='/profile' element={<ProtectedRoute> <Profile /> </ProtectedRoute>} />
       <Route path='/viewcart' element={<ProtectedRoute> <ViewCart /> </ProtectedRoute>} />
       <Route path='/success' element={<ProtectedRoute> <Success /> </ProtectedRoute>} />
       <Route path='/cancel' element={<ProtectedRoute> <Cancel /> </ProtectedRoute>} />
       <Route path='/my-order' element={<ProtectedRoute> <MyOrder /> </ProtectedRoute>} />
+      <Route path='/search' element={<ProtectedRoute> <SearchResults /> </ProtectedRoute>} />
       <Route path='/order' element={<ProtectedRoute>
         <Elements stripe={stripePromise}>
           <Order />
         </Elements>
       </ProtectedRoute>} />
-    </Route >
+    </Route>
   )
 )
 
@@ -67,7 +70,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <UserProvider>
         <FoodProvider>
           <CartProvider>
-            <RouterProvider router={router} />
+            <SearchProvider>
+              <RouterProvider router={router} />
+            </SearchProvider>
           </CartProvider>
         </FoodProvider>
       </UserProvider>

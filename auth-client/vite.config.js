@@ -5,14 +5,20 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
+    port: 5173,
+    host: true,
+    strictPort: true,
     fs: {
       strict: true,
       deny: ['.env', '.env.*', '*.{pem,crt,key}'],
     },
     cors: false, // Or configure strict CORS
     hmr: {
-      protocol: 'wss',
-      clientPort: 443
+      protocol: 'ws',
+      host: 'localhost',
+      port: 5173,
+      clientPort: 5173,
+      timeout: 30000
     }
   },
   build: {

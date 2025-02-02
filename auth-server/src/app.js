@@ -43,12 +43,29 @@ app.use((req, res, next) => {
     next();
 });
 
-// Rate limiting
-const limiter = rateLimit({
+// Separate rate limiters for different routes
+const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100 // limit each IP to 100 requests per windowMs
+    max: 100, // 100 requests per window
+    message: {
+        success: false,
+        message: "Too many auth requests, please try again later"
+    }
 });
-app.use('/api/', limiter);
+
+const foodLimiter = rateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: 200, // 200 requests per minute
+    message: {
+        success: false,
+        message: "Too many food requests, please try again later"
+    }
+});
+
+// Apply rate limiting selectively
+app.use('/api/v1/user', authLimiter);
+app.use('/api/v1/food', foodLimiter);
+app.use('/api/v1/order', authLimiter);
 
 import imageRoute from "./routes/image.route.js"
 import userRoute from "./routes/user.route.js"

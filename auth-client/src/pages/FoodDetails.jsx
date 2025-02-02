@@ -8,13 +8,13 @@ import { toast } from 'react-toastify'
 
 function FoodDetails() {
     const params = useParams()
-    const [foodDetails, setFoodDetails] = useState([])
+    const [foodDetails, setFoodDetails] = useState(null)
     const [quantity, setQuantity] = useState(1)
     const { addToCart, removeItem, cartItems } = useCartContext()
 
     const getFoodDetails = useCallback(async () => {
         try {
-            const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/food/getFoodDetails/${params.id}`)
+            const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/food/food/${params.id}`)
             if (res.data.success) {
                 setFoodDetails(res.data.data.foodItems)
             }
@@ -27,6 +27,10 @@ function FoodDetails() {
     useEffect(() => {
         getFoodDetails()
     }, [getFoodDetails]);
+
+    if (!foodDetails) {
+        return <div className="pt-[16vh] text-center">Loading...</div>
+    }
 
     const isInCart = cartItems.some(item => item._id === foodDetails._id);
 
@@ -61,7 +65,7 @@ function FoodDetails() {
         <div className="pt-[16vh]">
             <div className="py-3 px-10 sm:px-4 md:px-6 lg:px-6">
                 <div className="container mx-auto">
-                    <PageNavigation title={foodDetails?.name} />
+                    <PageNavigation title={foodDetails.name} />
                     <div className="grid grid-cols-1 md:grid-cols-2 pb-14 gap-8">
                         <div className="bg-red-200/[0.3] border rounded-md mb-5 p-4 flex items-center justify-center">
                             <img

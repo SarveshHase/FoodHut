@@ -19,7 +19,7 @@ function RecommendedFood() {
 
     useEffect(() => {
         getRatedFoods()
-    }, [ratedFood])
+    }, [])
     return (
         <div className="py-3 px-10 sm:px-4 md:px-6">
             <div className="container mx-auto py-[2vh]">
