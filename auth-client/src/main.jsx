@@ -6,7 +6,7 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
-import { UserProvider } from '../context/UserContext.jsx'
+import { UserProvider } from '../context/userContext.jsx'
 import ProtectedRoute from './pages/ProtectedRoute.jsx'
 import VerifyOtp from './pages/VerifyOtp.jsx'
 import Error from './components/admin_components/Error.jsx'
