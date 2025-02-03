@@ -18,7 +18,7 @@ function Service() {
                             </span> service
                         </div>
                         <div className="lg:text-lg text-[#191919] md:text-base text-sm">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias impedit ab ipsum iusto fugiat doloribus a excepturi odio labore architecto.
+                            At FoodHut, we go beyond just food delivery. We offer a comprehensive dining solution that includes real-time order tracking, personalized recommendations, and exceptional customer support. Our platform ensures seamless communication between customers, restaurants, and delivery partners, making every order a hassle-free experience.
                         </div>
                         <Link to="/whyus" className="flex gap-8 items-center" onClick={(e) => {
                             e.preventDefault();

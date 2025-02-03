@@ -20,12 +20,7 @@ function AboutUs() {
                                 </h2>
 
                                 <p>
-                                    Donec porttitor, enim ut dapibus lobortis, lectus sem tincidunt dui, eget ornare lectus ex non
-                                    libero. Nam rhoncus diam ultrices porttitor laoreet. Ut mollis fermentum ex, vel viverra lorem
-                                    volutpat sodales. In ornare porttitor odio sit amet laoreet. Sed laoreet, nulla a posuere
-                                    ultrices, purus nulla tristique turpis, hendrerit rutrum augue quam ut est. Fusce malesuada
-                                    posuere libero, vitae dapibus eros facilisis euismod. Sed sed lobortis justo, ut tincidunt
-                                    velit. Mauris in maximus eros.
+                                    Welcome to FoodHut, where passion meets flavor! We're dedicated to bringing you an exceptional dining experience right to your doorstep. Our platform connects you with the finest local restaurants and cuisines, ensuring that every meal is a delightful experience. We prioritize quality, convenience, and customer satisfaction, working closely with top-rated restaurants to deliver fresh, delicious meals. Our user-friendly interface makes ordering food a breeze, while our efficient delivery system ensures your meals arrive hot and fresh. Join our growing community of food lovers and experience the perfect blend of taste, technology, and convenience.
                                 </p>
                             </div>
                         </main>

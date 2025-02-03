@@ -17,7 +17,7 @@ function Service() {
                             </span> service
                         </div>
                         <div className="lg:text-lg text-[#191919] md:text-base text-sm">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias impedit ab ipsum iusto fugiat doloribus a excepturi odio labore architecto.
+                            Discover a world of culinary excellence with our diverse range of services. From expert chefs crafting delicious meals to prompt delivery and exceptional customer care, we ensure every aspect of your dining experience is perfect. Our commitment to quality and service excellence sets us apart in the food delivery industry.
                         </div>
                         <Link to="/whyus" className="flex gap-8 items-center" onClick={(e) => {
                             e.preventDefault();
