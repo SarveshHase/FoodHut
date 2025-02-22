@@ -18,7 +18,6 @@ function Order() {
     const [scriptLoaded, setScriptLoaded] = useState(false)
 
     useEffect(() => {
-        console.log("Current user state:", user);
     }, [user]);
 
     const itemsPrice = cartItems.reduce((a, c) => a + (c.qty * c.price), 0)

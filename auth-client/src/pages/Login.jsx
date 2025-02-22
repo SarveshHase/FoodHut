@@ -12,8 +12,6 @@ function Login() {
         const email = form.email.value;
         const password = form.password.value;
         const userData = { email, password }
-        console.log(userData);
-
         fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/user/login`, {
             method: "POST",
             headers: {

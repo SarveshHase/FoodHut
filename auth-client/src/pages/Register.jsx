@@ -38,8 +38,6 @@ function Register() {
         const passwordConfirm = form.confirmPassword.value;
         const avatar = image?.url || "";
         const userData = { name, email, password, passwordConfirm, avatar }
-        console.log(userData);
-
         fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/user/register`, {
             method: "POST",
             headers: {
