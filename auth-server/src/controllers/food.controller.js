@@ -232,7 +232,7 @@ const getTopRatedFoodsController = async (req, res) => {
 const searchFoodsController = async (req, res) => {
     try {
         const { term } = req.query;
-        
+
         if (!term) {
             return res.status(400).json(
                 new ApiResponse(400, {}, "Search term is required")
@@ -240,7 +240,7 @@ const searchFoodsController = async (req, res) => {
         }
 
         const searchRegex = new RegExp(term, 'i');
-        
+
         const foodItems = await Food.find({
             $or: [
                 { name: searchRegex },
