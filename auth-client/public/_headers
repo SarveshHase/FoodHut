@@ -1,0 +1,2 @@
+/*
+  Content-Security-Policy: default-src 'self'; font-src 'self' data: https://m.stripe.network https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://m.stripe.network; script-src 'self' 'unsafe-inline' https://m.stripe.network https://js.stripe.com; connect-src 'self' https://api.stripe.com https://m.stripe.network;
