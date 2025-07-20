@@ -1,11 +1,15 @@
-import logo from '../assets/Logo.svg'
+import logo from '../assets/Logo.svg';
+import { FaHeart } from "react-icons/fa";
 
 function Footer() {
     return (
         <footer className="footer p-10 bg-red-200/30 text-base">
             <aside>
                 <img src={logo} alt="" />
-                <p>ACME Industries Ltd.<br />Providing reliable tech since 1992</p>
+                <p className="flex items-center gap-1">
+                    Made With Love By Skh. 
+                    <FaHeart size={20} className='text-[#f54748]'/>
+                </p>
             </aside>
             <nav>
                 <header className="footer-title text-xl text-[#f54748]">Services</header>

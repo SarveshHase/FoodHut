@@ -31,24 +31,17 @@ function Order() {
             console.log("1. Payment button clicked");
             setIsLoading(true);
 
-            if (!user) {
-                console.error("3a. User object is null or undefined");
+            if (!user?.user?._id) {
+                console.error("User is not authenticated");
                 toast.error("Please login to continue");
                 navigate('/login');
                 return;
             }
 
-            if (!user._id) {
-                console.error("3b. User ID is missing", user);
-                toast.error("User session is invalid. Please login again");
-                navigate('/login');
-                return;
-            }
-
-            console.log("3c. User authenticated:", {
-                userId: user._id,
-                name: user.name,
-                email: user.email
+            console.log("User authenticated:", {
+                userId: user.user._id,
+                name: user.user.name,
+                email: user.user.email
             });
 
             if (!stripe) {
@@ -63,16 +56,21 @@ function Order() {
                     qty: item.qty
                 }
             ))
-            const res = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/order/order`, {
-                user: user?.user?._id,
+            console.log("Sending order data:", {
                 items: orderItems,
-                totalAmount: totalPrice,
-                token: localStorage.getItem("token")
+                totalAmount: totalPrice
+            });
+
+            const res = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/order/order`, {
+                items: orderItems,
+                totalAmount: totalPrice
             }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
-            })
+            });
+
+            console.log("Server response:", res.data);
 
             if (res.data.success) {
                 await stripe.redirectToCheckout({
@@ -85,24 +83,19 @@ function Order() {
                 toast.error(res.data.message);
             }
         } catch (error) {
-            console.error("Error in payment:", error);
-            console.error("Error details:", {
-                message: error.message,
+            console.error("Error in payment:", {
+                error: error.message,
                 response: error.response?.data,
-                user: user
+                status: error.response?.status,
+                items: orderItems,
+                totalAmount: totalPrice
             });
-            toast.error(error.response?.data?.message || "Payment failed");
+            toast.error(error.response?.data?.message || error.message || "Payment failed");
         } finally {
             setIsLoading(false);
         }
     };
 
-    useEffect(() => {
-        if (!user || !user._id) {
-            toast.error("Please login to access orders");
-            navigate('/login');
-        }
-    }, [user, navigate]);
 
     return (
         <div className="h-screen pt-[16vh]">

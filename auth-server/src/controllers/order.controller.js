@@ -7,7 +7,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const createOrderController = async (req, res) => {
     try {
-        const { user, items, totalAmount } = req.body;
+        const { items, totalAmount } = req.body;
+        const userId = req.body.userId; // This comes from auth middleware
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ["card"],
             line_items: [
@@ -29,7 +30,7 @@ const createOrderController = async (req, res) => {
 
         if (session.id) {
             const newOrder = await Order.create({
-                user,
+                user: userId,
                 items,
                 totalAmount
             });
@@ -86,7 +87,7 @@ const createOrderController = async (req, res) => {
                 );
         }
     } catch (error) {
-        console.log("Error in createOrderController: ", error.message);
+        console.log("Error in createOrderController: ", error);
         return res
             .status(200)
             .json(

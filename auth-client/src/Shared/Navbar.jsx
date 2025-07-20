@@ -41,6 +41,7 @@ function Navbar() {
                         <NavLink to="/" onClick={(e) => {
                             e.preventDefault();
                             manageProgress();
+                            window.scrollTo(0, 0);
                             navigate('/');
                         }}>
                             <img src={logo} alt="" className='h-14 cursor-pointer' />
@@ -52,6 +53,7 @@ function Navbar() {
                             } onClick={(e) => {
                                 e.preventDefault();
                                 manageProgress();
+                                window.scrollTo(0, 0);
                                 navigate('/');
                             }}>
                                 Today&apos;s Special
@@ -61,6 +63,7 @@ function Navbar() {
                             } onClick={(e) => {
                                 e.preventDefault();
                                 manageProgress();
+                                window.scrollTo(0, 0);
                                 navigate('/whyus');
                             }}>
                                 Why Us
@@ -71,6 +74,7 @@ function Navbar() {
                             } onClick={(e) => {
                                 e.preventDefault();
                                 manageProgress();
+                                window.scrollTo(0, 0);
                                 navigate('/menu');
                             }}>
                                 Our Menu
@@ -101,6 +105,7 @@ function Navbar() {
                                             <Link to="/viewcart" onClick={(e) => {
                                                 e.preventDefault();
                                                 manageProgress();
+                                                window.scrollTo(0, 0);
                                                 navigate('/viewcart');
                                             }}>
                                                 <button className="bg-[#f54748] active:scale-90 transition duration-150 transform shadow-md hover:shadow-xl rounded-full px-3 py-2 text-xl fonr-medium text-white mx-auto text-center" type='submit'>View Cart</button>
@@ -123,6 +128,7 @@ function Navbar() {
                                                 <Link to="/profile" className="justify-between" onClick={(e) => {
                                                     e.preventDefault();
                                                     manageProgress();
+                                                    window.scrollTo(0, 0);
                                                     navigate('/profile');
                                                 }}>
                                                     Profile
@@ -142,6 +148,7 @@ function Navbar() {
                                     (<Link to="/login" onClick={(e) => {
                                         e.preventDefault();
                                         manageProgress();
+                                        window.scrollTo(0, 0);
                                         navigate('/login');
                                     }}>
                                         <button className="bg-[#F54748] active:scale-90 transition duration-100 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white">
@@ -165,6 +172,8 @@ function Navbar() {
                             } onClick={(e) => {
                                 e.preventDefault();
                                 manageProgress();
+                                window.scrollTo(0, 0);
+                                setNav(false);
                                 navigate('/');
                             }}>
                                 Today&apos;s Special
@@ -174,6 +183,8 @@ function Navbar() {
                             } onClick={(e) => {
                                 e.preventDefault();
                                 manageProgress();
+                                window.scrollTo(0, 0);
+                                setNav(false);
                                 navigate('/whyus');
                             }}>
                                 Why Us
@@ -183,6 +194,8 @@ function Navbar() {
                             } onClick={(e) => {
                                 e.preventDefault();
                                 manageProgress();
+                                window.scrollTo(0, 0);
+                                setNav(false);
                                 navigate('/menu');
                             }}>
                                 Our Menu
@@ -192,6 +205,8 @@ function Navbar() {
                             } onClick={(e) => {
                                 e.preventDefault();
                                 manageProgress();
+                                window.scrollTo(0, 0);
+                                setNav(false);
                                 navigate('/admin/addFood');
                             }}>
                                 Add Food
@@ -212,6 +227,8 @@ function Navbar() {
                                             <Link to="viewcart" onClick={(e) => {
                                                 e.preventDefault();
                                                 manageProgress();
+                                                window.scrollTo(0, 0);
+                                                setNav(false);
                                                 navigate('/viewcart');
                                             }}>
                                                 <button className="bg-[#f54748] active:scale-90 transition duration-150 transform shadow-md hover:shadow-xl rounded-full px-3 py-2 text-xl fonr-medium text-white mx-auto text-center" type='submit'>View Cart</button>
@@ -237,6 +254,8 @@ function Navbar() {
                                     (<Link to="/login" onClick={(e) => {
                                         e.preventDefault();
                                         manageProgress();
+                                        window.scrollTo(0, 0);
+                                        setNav(false);
                                         navigate('/login');
                                     }}>
                                         <button className="bg-[#F54748] active:scale-90 transition duration-100 transform hover:shadow-xl shadow-md rounded-full px-8 py-2 text-xl font-medium text-white">

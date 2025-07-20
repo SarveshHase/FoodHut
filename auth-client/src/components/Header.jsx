@@ -20,7 +20,7 @@ function Header() {
         <div className='py-3 px-10 sm:px-4 md:px-6 lg:px-6'>
             <div className="container mx-auto py-[14vh]">
                 <div className="grid grid-cols-1 relative lg:grid-cols-2 gap-8 items-center">
-                    <div className="w-[32rem] flex flex-col space-y-6">
+                    <div className="w-full lg:w-[32rem] flex flex-col space-y-6">
                         <div className="text-4xl md:text-5xl font-bold text-[#2e2e2e] lg:text-6xl">
                             We are <span className="text-[#f54748]">Serious</span> About <span className="text-[#f54748]">Food</span> & <span className="text-[#ffc65c]">Customers.</span>
                         </div>
@@ -53,7 +53,7 @@ function Header() {
                             >Explore Now</button>
                         </div>
                     </div>
-                    <img src={header} className='h-[28rem] mx-auto justify-end' alt="" />
+                    <img src={header} className='w-full h-auto lg:h-[28rem] mx-auto justify-end' alt="" />
                 </div>
 
             </div>
