@@ -24,8 +24,12 @@ const createOrderController = async (req, res) => {
                 },
             ],
             mode: "payment",
-            success_url: `${process.env.LOCALHOST_URL}/success`,
-            cancel_url: `${process.env.LOCALHOST_URL}/cancel`
+            success_url: process.env.FRONTEND_URL.startsWith('http')
+                ? `${process.env.FRONTEND_URL}/success`
+                : `https://${process.env.FRONTEND_URL}/success`,
+            cancel_url: process.env.FRONTEND_URL.startsWith('http')
+                ? `${process.env.FRONTEND_URL}/cancel`
+                : `https://${process.env.FRONTEND_URL}/cancel`
         });
 
         if (session.id) {
@@ -87,7 +91,20 @@ const createOrderController = async (req, res) => {
                 );
         }
     } catch (error) {
-        console.log("Error in createOrderController: ", error);
+        console.log("Error in createOrderController: ", {
+            error: error.message,
+            type: error.type,
+            code: error.code,
+            param: error.param,
+            urls: {
+                success: process.env.FRONTEND_URL.startsWith('http')
+                    ? `${process.env.FRONTEND_URL}/success`
+                    : `https://${process.env.FRONTEND_URL}/success`,
+                cancel: process.env.FRONTEND_URL.startsWith('http')
+                    ? `${process.env.FRONTEND_URL}/cancel`
+                    : `https://${process.env.FRONTEND_URL}/cancel`
+            }
+        });
         return res
             .status(200)
             .json(

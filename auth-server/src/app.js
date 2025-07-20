@@ -8,6 +8,9 @@ import xss from 'xss';
 
 const app = express()
 
+// Trust proxy for rate limiting behind reverse proxies
+app.set('trust proxy', 1);
+
 // XSS Protection Middleware
 const xssProtection = (req, res, next) => {
     if (req.body) {
